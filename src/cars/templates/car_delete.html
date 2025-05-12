@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .car-delete-container {
+      max-width: 420px;
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(44,116,179,0.10);
+      padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .car-delete-container h2 {
+      color: #d9534f;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .car-delete-container p {
+      color: #222;
+      margin-bottom: 24px;
+      font-size: 1.08rem;
+    }
+    .delete-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .btn-danger {
+      background: #d9534f;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,116,179,0.07);
+      text-decoration: none !important;
+      display: inline-block;
+    }
+    .btn-danger:hover {
+      background: #b52a1c;
+    }
+    .btn-secondary {
+      background: #b5c7d3;
+      color: #222;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,116,179,0.07);
+      text-decoration: none !important;
+      display: inline-block;
+    }
+    .btn-secondary:hover {
+      background: #8fa6b2;
+      color: #fff;
+    }
+  </style>
+  <div class="car-delete-container">
+    <h2>Confirmar exclusão</h2>
+    <p>Tem certeza que deseja excluir o carro <strong>{{ object }}</strong>?</p>
+    <form method="post">
+      {% csrf_token %}
+      <div class="delete-buttons">
+        <button type="submit" class="btn-danger">Excluir</button>
+        <a href="{% url 'cars_list' %}" class="btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

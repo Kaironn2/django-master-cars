@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 32px;
+      gap: 10px;
+    }
+
+    .search-bar input[type="text"] {
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1.5px solid #b5c7d3;
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #f7fafc;
+      min-width: 220px;
+    }
+
+    .search-bar input[type="text"]:focus {
+      border-color: #0096c7;
+      background: #fff;
+    }
+
+    .search-bar button[type="submit"] {
+      background: #0096c7;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,116,179,0.07);
+    }
+
+    .search-bar button[type="submit"]:hover {
+      background: #0a2647;
+    }
+
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 28px;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 10px;
+    }
+
+    .car-card {
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+      box-shadow: 0 4px 16px rgba(44,116,179,0.10);
+      border-radius: 14px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
+      min-height: 340px;
+      max-width: 340px;
+      border: 1.5px solid #e3e1e1;
+    }
+
+    .car-info {
+      background: #e3e1e1;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 100px;
+    }
+
+    .car-card:hover {
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(44,116,179,0.18);
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .car-card img {
+      width: 100%;
+      min-height: 120px;
+      max-height: 240px;
+      object-fit: cover;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      background: #e3e1e1;
+      flex: 1 1 auto;
+      display: block;
+    }
+
+    .car-info h2 {
+      font-size: 1.3rem;
+      margin: 16px 0 6px 0;
+      color: #0a2647;
+      font-weight: 700;
+    }
+
+    .car-info p {
+      font-size: 0.98rem;
+      margin: 0 0 2px 0;
+      color: #222;
+    }
+
+    .car-info .price {
+      color: #0096c7;
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin-bottom: 12px;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #888;
+      font-size: 1.2rem;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .car-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .search-bar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .car-card img {
+        height: 130px;
+      }
+    }
+  </style>
+
+  <form method="GET" action="{% url 'cars_list' %}" class="search-bar">
+    <input type="text" name="search" placeholder="Buscar carro..." value="{{ request.GET.search }}">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="car-grid">
+    {% if cars %}
+      {% for car in cars %}
+        <a href="{% url 'car_detail' car.pk %}" style="text-decoration:none;">
+          <div class="car-card">
+            <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+            <div class="car-info">
+              <h2>{{ car.brand }} {{ car.model }}</h2>
+              <p>{{ car.factory_year }}{% if car.model_year %} / {{ car.model_year }}{% endif %}</p>
+              <div class="price">R$ {{ car.price }}</div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+      <p class="no-results">Nenhum carro encontrado.</p>
+    {% endif %}
+  </div>
+{% endblock %}

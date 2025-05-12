@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    .register-container {
+      max-width: 400px;
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(44,116,179,0.10);
+      padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .register-container h2 {
+      color: #0a2647;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .register-container label {
+      display: block;
+      text-align: left;
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 2px;
+      padding-left: 2px;
+    }
+    .register-container input[type="text"],
+    .register-container input[type="password"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #b5c7d3;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f7fafc;
+      transition: border-color 0.2s;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+    .register-container input[type="text"]:focus,
+    .register-container input[type="password"]:focus {
+      border-color: #0096c7;
+      background: #fff;
+      outline: none;
+    }
+    .register-container button[type="submit"] {
+      background: #0096c7;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,116,179,0.07);
+      margin-top: 10px;
+      width: 100%;
+    }
+    .register-container button[type="submit"]:hover {
+      background: #0a2647;
+    }
+    .register-login-link {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.98rem;
+    }
+    .register-login-link a {
+      color: #0096c7;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .register-login-link a:hover {
+      color: #0a2647;
+    }
+  </style>
+
+  <div class="register-container">
+    <h2>Cadastrar</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Cadastrar</button>
+    </form>
+    <div class="register-login-link">
+      Já tem uma conta? <a href="{% url 'login' %}">Entrar</a>
+    </div>
+  </div>
+{% endblock %}

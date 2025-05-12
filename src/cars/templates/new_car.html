@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    .car-form-container {
+      max-width: 430px;
+      margin: 36px auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(44,116,179,0.10);
+      padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .car-form-container h2 {
+      color: #0a2647;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .car-form-container table {
+      width: 100%;
+      margin-bottom: 18px;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+    .car-form-container td {
+      padding: 0;
+      vertical-align: middle;
+    }
+    .car-form-container td label {
+      display: block;
+      text-align: left;
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 2px;
+      padding-left: 2px;
+    }
+    .car-form-container input[type="text"],
+    .car-form-container input[type="number"],
+    .car-form-container input[type="file"],
+    .car-form-container select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #b5c7d3;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f7fafc;
+      transition: border-color 0.2s;
+      margin-top: 2px;
+      box-sizing: border-box;
+      text-align: left;
+    }
+    .car-form-container input[type="text"]:focus,
+    .car-form-container input[type="number"]:focus,
+    .car-form-container select:focus {
+      border-color: #0096c7;
+      background: #fff;
+      outline: none;
+    }
+    .car-form-container input[type="submit"] {
+      background: #0096c7;
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(44,116,179,0.07);
+      margin-top: 10px;
+      width: 100%;
+    }
+    .car-form-container input[type="submit"]:hover {
+      background: #0a2647;
+    }
+  </style>
+
+  <div class="car-form-container">
+    <h2>Cadastrar Novo Carro</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <input type="submit" value="Cadastrar" class="btn btn-primary">
+    </form>
+  </div>
+{% endblock %}
