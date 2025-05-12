@@ -28,6 +28,29 @@
       color: #0a2647;
       font-weight: 700;
     }
+    .car-bio {
+      width: 100%;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 1.04rem;
+      color: #222;
+      box-shadow: 0 1px 4px rgba(44,116,179,0.04);
+      min-height: 38px;
+    }
+    .car-bio .bio-icon {
+      font-size: 1.2rem;
+      color: #0096c7;
+      margin-top: 2px;
+    }
+    .car-bio .bio-empty {
+      color: #888;
+      font-style: italic;
+    }
     .car-detail-list {
       width: 100%;
       margin-bottom: 18px;
@@ -76,11 +99,20 @@
   <div class="car-detail-container">
     <img src="{{ object.photo.url }}" alt="{{ object.model }} - {{ object.brand }}">
     <h2>{{ object.brand }} {{ object.model }}</h2>
+
     <div class="car-detail-list">
       <p><strong>Ano de fabricação:</strong> {{ object.factory_year }}</p>
       <p><strong>Ano do modelo:</strong> {{ object.model_year }}</p>
       <p><strong>Placa:</strong> {{ object.plate }}</p>
       <p class="price"><strong>Preço:</strong> R$ {{ object.price }}</p>
+    </div>
+    <div class="car-bio">
+      <span class="bio-icon">📝</span>
+      {% if object.bio %}
+        <span>{{ object.bio }}</span>
+      {% else %}
+        <span class="bio-empty">Sem descrição para este carro.</span>
+      {% endif %}
     </div>
     {% if user.is_authenticated %}
       <div class="buttons-container">

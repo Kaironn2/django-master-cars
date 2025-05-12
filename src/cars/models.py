@@ -27,6 +27,7 @@ class Car(models.Model):
         max_digits=10, decimal_places=2, blank=True, null=True
     )
     photo = models.ImageField(upload_to='cars/photos/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.model
