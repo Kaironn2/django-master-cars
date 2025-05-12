@@ -97,7 +97,12 @@
     }
   </style>
   <div class="car-detail-container">
-    <img src="{{ object.photo.url }}" alt="{{ object.model }} - {{ object.brand }}">
+    {% load static %}
+    {% if object.photo %}
+      <img src="{{ object.photo.url }}" alt="{{ object.model }} - {{ object.brand }}">
+    {% else %}
+      <img src="{% static 'img/grey-car-icon.jpg'' %}" alt="Sem foto disponível">
+    {% endif %}
     <h2>{{ object.brand }} {{ object.model }}</h2>
 
     <div class="car-detail-list">
@@ -108,11 +113,7 @@
     </div>
     <div class="car-bio">
       <span class="bio-icon">📝</span>
-      {% if object.bio %}
-        <span>{{ object.bio }}</span>
-      {% else %}
-        <span class="bio-empty">Sem descrição para este carro.</span>
-      {% endif %}
+      <span>{{ object.bio }}</span>
     </div>
     {% if user.is_authenticated %}
       <div class="buttons-container">

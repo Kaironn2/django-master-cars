@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
   <style>
@@ -143,11 +144,16 @@
   </form>
 
   <div class="car-grid">
+    {% load static %}
     {% if cars %}
       {% for car in cars %}
         <a href="{% url 'car_detail' car.pk %}" style="text-decoration:none;">
           <div class="car-card">
-            <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+            {% if car.photo %}
+              <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
+            {% else %}
+              <img src="{% static 'img/grey-car-icon.jpg' %}" alt="Sem foto disponível">
+            {% endif %}
             <div class="car-info">
               <h2>{{ car.brand }} {{ car.model }}</h2>
               <p>{{ car.factory_year }}{% if car.model_year %} / {{ car.model_year }}{% endif %}</p>
