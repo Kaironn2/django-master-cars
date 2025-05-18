@@ -14,10 +14,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: >
-      sh -c "python src/manage.py migrate &&
-             python src/manage.py collectstatic --noinput &&
-             python src/manage.py runserver 0.0.0.0:8000"
+    command: ./start.sh
     volumes:
       - .:/app
       - media_data:/app/src/media
