@@ -17,7 +17,7 @@ services:
     volumes:
       - .:/app
       - media_data:/app/src/media
-      - static_data:/app/src/static
+      - static_data:/app/src/staticfiles
     ports:
       - "8000:8000"
     env_file:
@@ -31,7 +31,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - media_data:/app/src/media:ro
-      - static_data:/app/src/static:ro
+      - static_data:/app/src/staticfiles:ro
     depends_on:
       - web
 
