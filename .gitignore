@@ -160,4 +160,5 @@ cython_debug/
 #.idea/
 
 media/
+src/staticfiles/
 .ruff_cache/
